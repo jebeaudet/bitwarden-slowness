@@ -66,16 +66,17 @@
         const fillTimer = document.getElementById('fillTimer');
 
         // Timer to detect form auto-fill
-        const observer = new MutationObserver(() => {
-            if (!formFilled && document.getElementById('username').value && document.getElementById('password').value) {
+        const checkFormFilled = () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!formFilled && username && password) {
                 formFilled = true;
                 const timeFilled = new Date().toLocaleTimeString();
                 fillTimer.textContent = `Form filled: ${timeFilled}`;
             }
-        });
+        };
 
-        observer.observe(document.getElementById('username'), { attributes: true, attributeFilter: ['value'], childList: false, subtree: false });
-        observer.observe(document.getElementById('password'), { attributes: true, attributeFilter: ['value'], childList: false, subtree: false });
+        setInterval(checkFormFilled, 1);
 
         // Detect Cmd+Shift+L
         document.addEventListener('keydown', (event) => {
