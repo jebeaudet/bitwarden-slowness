@@ -71,10 +71,8 @@
             const password = document.getElementById('password').value;
             if (username && password && start !== -1) {
                 let end = Date.now();
-                start = -1
-                document.getElementById('username').value = '';
-                document.getElementById('password').value = '';
                 const timeFilled = end - start;
+                start = -1
                 fillTimer.textContent = `Form filled: ${timeFilled} ms`;
             }
         };
