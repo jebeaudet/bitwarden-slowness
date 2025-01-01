@@ -72,7 +72,7 @@
             if (username && password && start !== -1) {
                 let end = Date.now();
                 const timeFilled = end - start;
-                fillTimer.textContent = `Form filled: ${timeFilled}`;
+                fillTimer.textContent = `Form filled: ${timeFilled} ms`;
                 start = -1
             }
         };
