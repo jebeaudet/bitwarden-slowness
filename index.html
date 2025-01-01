@@ -62,17 +62,18 @@
     </div>
 
     <script>
-        let formFilled = false;
+        let start = -1;
         const fillTimer = document.getElementById('fillTimer');
 
         // Timer to detect form auto-fill
         const checkFormFilled = () => {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            if (!formFilled && username && password) {
-                formFilled = true;
-                const timeFilled = new Date().toLocaleTimeString();
+            if (username && password && start !== -1) {
+                let end = Date.now();
+                const timeFilled = end - start;
                 fillTimer.textContent = `Form filled: ${timeFilled}`;
+                start = -1
             }
         };
 
@@ -80,8 +81,10 @@
 
         // Detect Cmd+Shift+L
         document.addEventListener('keydown', (event) => {
-            if (event.metaKey && event.shiftKey && event.key === 'L') {
-                alert('Cmd+Shift+L detected');
+            if (event.metaKey && event.shiftKey) {
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                start = Date.now();
             }
         });
     </script>
